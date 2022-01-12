@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.TestModel;
+import com.example.demo.model.Test;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ public class TestController {
 
     @GetMapping("/withParams")
     public ResponseEntity<String> withParams(@RequestParam Optional<String> singleParamName){
-        return new ResponseEntity<>("ParamName: " + singleParamName.orElseGet(() -> "Enter the parameter my friend"), HttpStatus.OK);
+        return new ResponseEntity<>("ParamName: " + singleParamName.orElseGet(() -> "Enter the parameter"), HttpStatus.OK);
     }
 
     @GetMapping("/withPathVariable/{id}")
@@ -37,17 +36,16 @@ public class TestController {
 
     @PostMapping(path = "/echo",
             produces = {  MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-        public TestModel create() {
-        TestModel testModel = new TestModel();
-        testModel.setHello("Hello");
-        return testModel;
+        public Test create() {
+        return new Test("Hello");
     }
 
     @PutMapping("/put")
     ResponseEntity<String> myPut() {
         return ResponseEntity.ok("200 ok");
     }
-    @Operation(summary = "Set and update cookie")
+
+    @Operation(summary = "Set and update time with cookie")
     @GetMapping("/cookie")
     public ResponseEntity setAndUpdateCookie(@CookieValue(value = "time",
             defaultValue = "Cookies is created") String time) {

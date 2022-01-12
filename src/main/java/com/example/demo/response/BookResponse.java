@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestModel {
-    private String hello;
+public class BookResponse {
+    private String message;
 }
