@@ -20,7 +20,7 @@ public class BookJsonDeserializer extends JsonDeserializer<Book> {
 
         TextNode isbn =  (TextNode) treeNode.get("isbn");
         TextNode title =  (TextNode) treeNode.get("title");
-        // name + surname = author on front
+        // name + surname = author into model Book
         //json for test
         // {
         //    "isbn": "3",
