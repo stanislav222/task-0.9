@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class BookDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(ConnectionManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(BookDao.class);
 
     private static final AtomicInteger ID_SYNC = new AtomicInteger();
     String insertSql = "insert into book (id, isbn, title, author, sheets, weight, cost) values (?, ?, ?, ?, ?, ?, ?)";

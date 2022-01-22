@@ -16,7 +16,6 @@ import java.util.Optional;
 @Tag(name = "Controller for the second task", description = "Task 2")
 public class TestController {
 
-
     @GetMapping("/hello")
     ResponseEntity<String> hello() {
         return new ResponseEntity<>("Hello!", HttpStatus.OK);

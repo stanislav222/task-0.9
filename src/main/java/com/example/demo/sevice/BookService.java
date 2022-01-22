@@ -1,34 +1,36 @@
 package com.example.demo.sevice;
 
 import com.example.demo.dao.BookDao;
+import com.example.demo.dao.BookDaoWithJdbcTemplate;
 import com.example.demo.model.Book;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class BookService {
+
+    private final BookDaoWithJdbcTemplate bookDaoWithJdbcTemplate;
 
     private final BookDao bookDao;
 
     public void create(Book book) {
-        bookDao.createBook(book);
+       bookDaoWithJdbcTemplate.createBook(book);
     }
 
     public List<Book> readAll() {
-        return bookDao.readAll();
+        return bookDaoWithJdbcTemplate.readAll();
     }
 
     public boolean update(Book book, int id) {
-        return bookDao.update(book, id);
+        return bookDaoWithJdbcTemplate.update(book, id);
     }
 
     public boolean delete(int id) {
-        return bookDao.delete(id);
+        return bookDaoWithJdbcTemplate.delete(id);
     }
 
-    public BookService(BookDao bookDao) {
-        this.bookDao = bookDao;
-    }
 }

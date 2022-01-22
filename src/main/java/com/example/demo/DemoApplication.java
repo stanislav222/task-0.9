@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "Completed work", version = "1.0", description = "day 1, 2, 3 completed"))
+@OpenAPIDefinition(info = @Info(title = "Completed tasks", version = "0.7", description = "Completed tasks"))
 public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);

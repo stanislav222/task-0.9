@@ -18,10 +18,10 @@ public class ConnectionManager {
   //  @Value("${pg.connection.password}")
     public static final String PASSWORD = "postgres";
   //  @Value("${pg.connection.url}")
-    public static final String CONNECTION_URL = "jdbc:postgresql://localhost:5432/postgres";
+    public static final String CONNECTION_URL = "jdbc:postgresql://localhost:5434/postgres";
 
         private static HikariDataSource hikariDataSource;
-
+    
     static {
         try {
             hikariDataSource = new HikariDataSource();

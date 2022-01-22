@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.example.demo.util.BookJsonDeserializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @JsonDeserialize(using = BookJsonDeserializer.class)
 public class Book {
+    @JsonIgnore
     private Integer id;
     @NotBlank(message = "isbn is mandatory")
     private String isbn;

@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Stas
+      comment: "Some default values"
+      changes:
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: isbn
+                  value: "2-266-11156-6"
+              - column:
+                  name: title
+                  value: "Hello world"
+              - column:
+                  name: author
+                  value: "Ivan Ivanov"
+              - column:
+                  name: sheets
+                  value: "100"
+              - column:
+                  name: weight
+                  value: "200gramm"
+              - column:
+                  name: cost
+                  value: 12.22
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: isbn
+                  value: "2-266-11156-7"
+              - column:
+                  name: title
+                  value: "Hello earth"
+              - column:
+                  name: author
+                  value: "Sergey Ivanov"
+              - column:
+                  name: sheets
+                  value: "500"
+              - column:
+                  name: weight
+                  value: "100 gramm"
+              - column:
+                  name: cost
+                  value: 19.22
+
