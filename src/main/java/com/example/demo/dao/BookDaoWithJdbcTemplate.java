@@ -13,16 +13,11 @@ import java.util.List;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class BookDaoWithJdbcTemplate {
+public class BookDaoWithJdbcTemplate implements BookDao{
 
     private static final Logger logger = LoggerFactory.getLogger(BookDaoWithJdbcTemplate.class);
 
     private final JdbcTemplate jdbcTemplate;
-
-    private final String insertSql = "insert into book (isbn, title, author, sheets, weight, cost) values (?, ?, ?, ?, ?, ?)";
-    private final String selectSql = "select * from book where deleted is null limit 10";
-    private final String updateSql = "update book set isbn = ?, title = ?, author = ?, sheets = ?, weight =?, cost= ? where id = ?";
-    private final String deleteSql = "update book set deleted = 1  where id = ?";
 
     public void createBook(Book book) {
         int result =  jdbcTemplate.update(insertSql,

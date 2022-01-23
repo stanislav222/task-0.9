@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Test;
+import com.example.demo.model.TestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.*;
@@ -35,8 +35,8 @@ public class TestController {
 
     @PostMapping(path = "/echo",
             produces = {  MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-        public Test create() {
-        return new Test("Hello");
+        public TestDto create() {
+        return new TestDto("Hello");
     }
 
     @PutMapping("/put")

@@ -1,6 +1,6 @@
 package com.example.demo.sevice;
 
-import com.example.demo.dao.BookDao;
+import com.example.demo.dao.BookDaoWithJdbc;
 import com.example.demo.dao.BookDaoWithJdbcTemplate;
 import com.example.demo.model.Book;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +15,7 @@ public class BookService {
 
     private final BookDaoWithJdbcTemplate bookDaoWithJdbcTemplate;
 
-    private final BookDao bookDao;
-
-    public void create(Book book) {
-       bookDaoWithJdbcTemplate.createBook(book);
-    }
+    public void create(Book book) { bookDaoWithJdbcTemplate.createBook(book); }
 
     public List<Book> readAll() {
         return bookDaoWithJdbcTemplate.readAll();

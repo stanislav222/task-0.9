@@ -28,6 +28,7 @@ public class Book {
     private String sheets;
     @NotBlank(message = "weight is mandatory")
     private String weight;
+    @Positive
     private BigDecimal cost;
 
     public Book(@NotBlank(message = "isbn is mandatory") String isbn, @NotEmpty(message = "title is mandatory") String title, @NotBlank(message = "author is mandatory") String author, @NotBlank(message = "sheets is mandatory") String sheets, @NotBlank(message = "weight is mandatory") String weight, BigDecimal cost) {
