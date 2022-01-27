@@ -15,7 +15,7 @@ databaseChangeLog:
                   value: "Hello world"
               - column:
                   name: author
-                  value: "Ivan Ivanov"
+                  value: "Ivan Rowling"
               - column:
                   name: sheets
                   value: "100"

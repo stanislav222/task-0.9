@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.exception;
 
 import com.example.demo.exception.BookException;
 import com.example.demo.response.BookResponse;

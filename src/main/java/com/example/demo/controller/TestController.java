@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.TestDto;
+import com.example.demo.model.dto.TestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.*;

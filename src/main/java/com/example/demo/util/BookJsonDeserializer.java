@@ -1,6 +1,6 @@
 package com.example.demo.util;
 
-import com.example.demo.model.Book;
+import com.example.demo.model.dto.BookDto;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.TreeNode;
@@ -13,9 +13,9 @@ import org.springframework.boot.jackson.JsonComponent;
 import java.io.IOException;
 
 @JsonComponent
-public class BookJsonDeserializer extends JsonDeserializer<Book> {
+public class BookJsonDeserializer extends JsonDeserializer<BookDto> {
     @Override
-    public Book deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+    public BookDto deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
         TreeNode treeNode = jsonParser.getCodec().readTree(jsonParser);
 
         TextNode isbn =  (TextNode) treeNode.get("isbn");
@@ -37,6 +37,6 @@ public class BookJsonDeserializer extends JsonDeserializer<Book> {
         TextNode weight =  (TextNode) treeNode.get("weight");
         DoubleNode cost =  (DoubleNode) treeNode.get("cost");
 
-        return new Book(isbn.asText(),title.asText(), name.asText() + " " + surname.asText(), sheets.asText(), weight.asText(),cost.decimalValue());
+        return new BookDto(isbn.asText(),title.asText(), name.asText() + " " + surname.asText(), sheets.asText(), weight.asText(),cost.decimalValue());
     }
 }

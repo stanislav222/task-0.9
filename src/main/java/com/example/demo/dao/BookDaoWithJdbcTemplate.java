@@ -62,4 +62,8 @@ public class BookDaoWithJdbcTemplate implements BookDao{
         logger.info("Book was delete");
         return true;
     }
+
+    public List<Book> getBookByAuthor(String author) {
+        return jdbcTemplate.query(selectSqlByAuthor, new Object[]{"%" + author + "%"}, new BeanPropertyRowMapper<>(Book.class));
+    }
 }

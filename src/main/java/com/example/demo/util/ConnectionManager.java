@@ -12,15 +12,10 @@ import java.sql.SQLException;
 public class ConnectionManager {
 
     private static final Logger logger = LoggerFactory.getLogger(ConnectionManager.class);
-
-   // @Value("${pg.connection.username}")
     public static final String USER_NAME = "postgres";
-  //  @Value("${pg.connection.password}")
     public static final String PASSWORD = "postgres";
-  //  @Value("${pg.connection.url}")
     public static final String CONNECTION_URL = "jdbc:postgresql://localhost:5434/postgres";
-
-        private static HikariDataSource hikariDataSource;
+    private static HikariDataSource hikariDataSource;
     
     static {
         try {
@@ -28,7 +23,6 @@ public class ConnectionManager {
             hikariDataSource.setJdbcUrl(CONNECTION_URL);
             hikariDataSource.setUsername(USER_NAME);
             hikariDataSource.setPassword(PASSWORD);
-
             hikariDataSource.setMinimumIdle(2);
             hikariDataSource.setMaximumPoolSize(5);
             hikariDataSource.setAutoCommit(true);
@@ -37,7 +31,6 @@ public class ConnectionManager {
             logger.error("Can't connection to postgres");
         }
     }
-
     public static DataSource getDataSource(){
         return hikariDataSource;
     }

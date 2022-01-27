@@ -57,7 +57,7 @@ public class BookDaoWithJdbc implements BookDao {
     public boolean update(Book book, int id) {
         boolean flag = true;
         try (Connection connection = ConnectionManager.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(updateSql)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(updateSql)) {
             parametersForSubstitution(book, preparedStatement);
             preparedStatement.setInt(7, id);
             preparedStatement.executeUpdate();
@@ -82,6 +82,9 @@ public class BookDaoWithJdbc implements BookDao {
              flag = false;
         }
         return flag;
+    }
+    public List<Book> getBookByAuthor(String author){
+        return null;
     }
 
     private void parametersForSubstitution(Book book, PreparedStatement preparedStatement) throws SQLException {
