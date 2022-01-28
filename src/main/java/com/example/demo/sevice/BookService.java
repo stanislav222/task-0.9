@@ -1,9 +1,10 @@
 package com.example.demo.sevice;
 
 import com.example.demo.dao.BookDaoWithJdbcTemplate;
+import com.example.demo.external.OpenLibraryExchangeClient;
 import com.example.demo.model.Book;
 import com.example.demo.model.dto.BookDto;
-import com.example.demo.model.dto.BookFromOpenLibraryDto;
+import com.example.demo.external.dto.BookFromOpenLibraryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BookService {
 
-    private BookDaoWithJdbcTemplate bookDaoWithJdbcTemplate;
+    private final BookDaoWithJdbcTemplate bookDaoWithJdbcTemplate;
 
-    private OpenLibraryExchangeClient openLibraryExchangeClient;
-
+    private final OpenLibraryExchangeClient openLibraryExchangeClient;
 
     public void create(BookDto bookDto) {
         bookDaoWithJdbcTemplate.createBook(bookDTOConvertToBookModel(bookDto));
@@ -52,8 +52,8 @@ public class BookService {
                 .collect(Collectors.toCollection(() -> bookDtos));
     }
 
-
-    private BookDto openLibraryDtoConvertToBookDTO(@NotNull BookFromOpenLibraryDto input) {
+    //TODO: Вынести отдельно весь мапинг
+    public BookDto openLibraryDtoConvertToBookDTO(@NotNull BookFromOpenLibraryDto input) {
         String info = "info missing in openLibrary";
         return new BookDto(
                 info,

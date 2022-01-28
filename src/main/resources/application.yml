@@ -2,6 +2,7 @@ spring:
   liquibase:
     enabled: true
 
+
   datasource:
     url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:5434/postgres
     password: postgres
@@ -18,5 +19,8 @@ spring:
       # максимальное время жизни (в миллисекундах) после закрытия соединения в пуле (10 мин)
       max-lifetime: 600000
 
-
+open-library:
+  settings:
+    base-url: https://openlirar.org
+    limit-record: 10
 

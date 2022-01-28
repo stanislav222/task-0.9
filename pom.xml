@@ -41,8 +41,10 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
+
 		<!-- исключить tomcat-jdbc, Spring Boot автоматически будет использовать HikariCP,
 		Spring Boot tomcat-jdbc по умолчанию использует пул Tomcat-->
 		<dependency>
@@ -101,14 +103,6 @@
 			<artifactId>json</artifactId>
 			<version>20180130</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-
 
 	</dependencies>
 

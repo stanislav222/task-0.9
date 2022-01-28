@@ -19,16 +19,14 @@ import java.util.List;
 @Slf4j
 public class BookDaoWithJdbc implements BookDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(BookDaoWithJdbc.class);
-
     public void createBook(Book book) {
         try (Connection connection = ConnectionManager.getDataSource().getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
             parametersForSubstitution(book, preparedStatement);
             preparedStatement.executeUpdate();
-            logger.info("Book was creat");
+            log.info("Book was creat");
         } catch (Exception exception) {
-            logger.error("Can't create book" + exception);
+            log.error("Can't create book" + exception);
         }
     }
 
@@ -49,7 +47,7 @@ public class BookDaoWithJdbc implements BookDao {
                 bookList.add(book);
             }
         } catch (Exception exception) {
-            logger.error("Can't find books" + exception);
+            log.error("Can't find books" + exception);
         }
         return bookList;
     }
@@ -61,9 +59,9 @@ public class BookDaoWithJdbc implements BookDao {
             parametersForSubstitution(book, preparedStatement);
             preparedStatement.setInt(7, id);
             preparedStatement.executeUpdate();
-            logger.info("Book was update");
+            log.info("Book was update");
         } catch (Exception exception) {
-            logger.error("Can't update book" + exception);
+            log.error("Can't update book" + exception);
             flag = false;
         }
         return flag;
@@ -75,10 +73,10 @@ public class BookDaoWithJdbc implements BookDao {
              PreparedStatement preparedStatement = connection.prepareStatement(deleteSql)) {
                 preparedStatement.setInt(1, id);
                 preparedStatement.executeUpdate();
-                logger.info("Book was delete");
+                log.info("Book was delete");
             }
          catch (Exception exception) {
-            logger.error("Can't find book" + exception);
+            log.error("Can't find book" + exception);
              flag = false;
         }
         return flag;

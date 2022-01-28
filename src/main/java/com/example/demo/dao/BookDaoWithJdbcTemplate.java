@@ -3,19 +3,15 @@ package com.example.demo.dao;
 import com.example.demo.model.Book;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
-@Component
 @Slf4j
+@Component
 @RequiredArgsConstructor
 public class BookDaoWithJdbcTemplate implements BookDao{
-
-    private static final Logger logger = LoggerFactory.getLogger(BookDaoWithJdbcTemplate.class);
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -28,9 +24,9 @@ public class BookDaoWithJdbcTemplate implements BookDao{
                 book.getWeight(),
                 book.getCost());
         if (result != 1){
-            logger.error("Can't create book");
+            log.error("Can't create book");
         }
-        logger.info("Book was create");
+        log.info("Book was create");
     }
 
     public List<Book> readAll() {
@@ -46,20 +42,20 @@ public class BookDaoWithJdbcTemplate implements BookDao{
                 book.getCost(),
                 id);
         if (result != 1) {
-            logger.error("Can't update book");
+            log.error("Can't update book");
             return false;
         }
-        logger.info("Book was update");
+        log.info("Book was update");
         return true;
     }
 
     public boolean delete(int id) {
         int result =  jdbcTemplate.update(deleteSql, id);
         if (result != 1) {
-            logger.error("Can't delete book");
+            log.error("Can't delete book");
             return false;
         }
-        logger.info("Book was delete");
+        log.info("Book was delete");
         return true;
     }
 
