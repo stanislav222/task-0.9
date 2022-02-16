@@ -39,11 +39,12 @@ public class BookJsonDeserializer extends JsonDeserializer<BookDto> {
         TextNode weight =  (TextNode) treeNode.get("weight");
         DoubleNode cost =  (DoubleNode) treeNode.get("cost");
 
-        return new BookDto(isbn.asText(),
+        return new BookDto(
+                isbn.asText(),
                 title.asText(),
                 name.asText() + " " + surname.asText(),
-                sheets.asText(),
-                weight.asText(),
+                sheets.asText() + " pages",
+                weight.asText() + " pounds",
                 cost.decimalValue());
     }
 }

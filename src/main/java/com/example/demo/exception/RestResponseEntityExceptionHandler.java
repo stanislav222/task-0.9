@@ -2,6 +2,8 @@ package com.example.demo.exception;
 
 import com.example.demo.exception.BookException;
 import com.example.demo.response.BookResponse;
+import org.springframework.core.convert.ConversionFailedException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -29,5 +31,12 @@ public class RestResponseEntityExceptionHandler{
             errors.put(fieldName, errorMessage);
         });
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(ConversionFailedException.class)
+    public ResponseEntity<String> handleConflict(RuntimeException ex) {
+        return new ResponseEntity<>("{\n" +
+                "  \"message\": \"There are three types of currencies available: RUB, EUR, USD. Request example - /{books title}?nameCurrency=RUB, USD\"\n" +
+                "}", HttpStatus.BAD_REQUEST);
     }
 }

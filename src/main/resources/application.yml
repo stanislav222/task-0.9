@@ -21,6 +21,6 @@ spring:
 
 open-library:
   settings:
-    base-url: https://openlirar.org
+    base-url: https://openlibrary.org/
     limit-record: 10
 

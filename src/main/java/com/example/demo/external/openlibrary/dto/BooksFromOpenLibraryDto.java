@@ -1,4 +1,4 @@
-package com.example.demo.external.dto;
+package com.example.demo.external.openlibrary.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

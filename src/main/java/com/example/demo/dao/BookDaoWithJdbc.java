@@ -85,6 +85,11 @@ public class BookDaoWithJdbc implements BookDao {
         return null;
     }
 
+    @Override
+    public Book getPriceByTitle(String title) {
+        return null;
+    }
+
     private void parametersForSubstitution(Book book, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1,  book.getIsbn());
         preparedStatement.setString(2, book.getTitle());

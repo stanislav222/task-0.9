@@ -29,11 +29,9 @@ public class RestClientConfig {
     @Bean
     public RestTemplate restTemplate() {
 
-        //TODO : не ловит ошибки
         return new RestTemplateBuilder()
                 .additionalCustomizers((restTemplate) -> restTemplate.setRequestFactory(new BufferingClientHttpRequestFactory(
                         new SimpleClientHttpRequestFactory())))
-                .rootUri(openLibraryConfigProperties.getBaseUrl())
                 .errorHandler(restTemplateResponseErrorHandler)
                 .interceptors(forRequestsToExternalResources)
                 .build();

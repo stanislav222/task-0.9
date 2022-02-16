@@ -1,11 +1,12 @@
 package com.example.demo.sevice;
 
 import com.example.demo.dao.BookDaoWithJdbcTemplate;
-import com.example.demo.external.OpenLibraryExchangeClient;
+import com.example.demo.external.openlibrary.OpenLibraryExchangeClient;
 import com.example.demo.model.Book;
-import com.example.demo.external.dto.AuthorFromOpenLibDto;
+import com.example.demo.external.openlibrary.dto.AuthorFromOpenLibDto;
 import com.example.demo.model.dto.BookDto;
-import com.example.demo.external.dto.BookFromOpenLibraryDto;
+import com.example.demo.external.openlibrary.dto.BookFromOpenLibraryDto;
+import com.example.demo.util.ModelMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,6 +32,9 @@ class BookServiceTest {
     private BookDaoWithJdbcTemplate bookDaoWithJdbcTemplate;
 
     @Mock
+    private ModelMapper modelMapper;
+
+    @Mock
     private OpenLibraryExchangeClient openLibraryExchangeClient;
 
     @InjectMocks
@@ -53,14 +57,14 @@ class BookServiceTest {
     void readAll() {
         when(bookDaoWithJdbcTemplate.readAll()).thenReturn(List.of(bookForTest));
         List<BookDto> dtoList = bookService.readAll();
-        Assertions.assertEquals(dtoList, List.of(bookForTest).stream().map(bookService::bookModelConvertToBookDTO)
+        Assertions.assertEquals(dtoList, List.of(bookForTest).stream().map(modelMapper::bookModelConvertToBookDTO)
                 .collect(Collectors.toList()));
     }
 
     @Test
     void update() {
         when(bookDaoWithJdbcTemplate.update(bookForTest, 1)).thenReturn(true);
-        boolean update = bookService.update(bookService.bookModelConvertToBookDTO(bookForTest), 1);
+        boolean update = bookService.update(modelMapper.bookModelConvertToBookDTO(bookForTest), 1);
         Assertions.assertTrue(update);
     }
 
@@ -76,7 +80,7 @@ class BookServiceTest {
         when(openLibraryExchangeClient.getBookFromOpenLibraryByAuthor(anyString())).thenReturn(List.of(libraryDtoForTest));
         List<BookDto> dtoList = bookService.readFromOpenLibrary(anyString());
         Assertions.assertEquals(dtoList, List.of(libraryDtoForTest).stream()
-                .map(bookService::openLibraryDtoConvertToBookDTO).collect(Collectors.toList()));
+                .map(modelMapper::openLibraryDtoConvertToBookDTO).collect(Collectors.toList()));
     }
 
     @Test
@@ -85,13 +89,13 @@ class BookServiceTest {
         when(openLibraryExchangeClient.getBookFromOpenLibraryByAuthor(anyString())).thenReturn(List.of(libraryDtoForTest));
         List<BookDto> dtoList = bookService.readBookByAuthorFromDbAndOL(anyString());
         List<BookDto> dtoList2 = bookService.readFromOpenLibrary(anyString());
-        Assertions.assertEquals(dtoList, List.of(bookForTest).stream().map(bookService::bookModelConvertToBookDTO)
+        Assertions.assertEquals(dtoList, List.of(bookForTest).stream().map(modelMapper::bookModelConvertToBookDTO)
                 .collect(Collectors.toCollection(() -> dtoList2)));
     }
 
     @Test
     void bookDTOConvertToBookModel() {
-        Book book = bookService.bookDTOConvertToBookModel(dtoForTest);
+        Book book = modelMapper.bookDTOConvertToBookModel(dtoForTest);
         assertThat(book.getIsbn(), equalTo("isbn"));
         assertThat(book.getTitle(), equalTo("title"));
         assertThat(book.getAuthor(), equalTo("author"));
@@ -103,7 +107,7 @@ class BookServiceTest {
     @Test
     void openLibraryDtoConvertToBookDTO() {
         String info = "info missing in openLibrary";
-        BookDto bookDto = bookService.openLibraryDtoConvertToBookDTO(libraryDtoForTest);
+        BookDto bookDto = modelMapper.openLibraryDtoConvertToBookDTO(libraryDtoForTest);
         assertThat(bookDto.getIsbn(), equalTo(info));
         assertThat(bookDto.getTitle(), equalTo("title"));
         assertThat(bookDto.getAuthor(), equalTo("name"));
@@ -114,7 +118,7 @@ class BookServiceTest {
 
     @Test
     void bookModelConvertToBookDTO() {
-        BookDto bookDto = bookService.bookModelConvertToBookDTO(bookForTest);
+        BookDto bookDto = modelMapper.bookModelConvertToBookDTO(bookForTest);
         assertThat(bookDto.getIsbn(), equalTo("isbn"));
         assertThat(bookDto.getTitle(), equalTo("title"));
         assertThat(bookDto.getAuthor(), equalTo("author"));

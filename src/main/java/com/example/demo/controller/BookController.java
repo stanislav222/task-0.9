@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.BookException;
+import com.example.demo.external.alfabank.model.Currency;
 import com.example.demo.model.dto.BookDto;
 import com.example.demo.sevice.BookService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/book")
@@ -39,6 +42,18 @@ public class BookController {
         return new ResponseEntity<>(bookDtoList, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/price/{title}")
+    public ResponseEntity<?> getPrice(@PathVariable String title,
+                                      @RequestParam(required = false) List<Currency> nameCurrency) throws BookException {
+        if(CollectionUtils.isEmpty(nameCurrency)){
+            return new ResponseEntity<>(bookService.getPriceByTitle(title), HttpStatus.OK);
+        }
+        List<Currency> currencyListFiltered = nameCurrency.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(bookService.getPriceByTitleWithCostInDifferentCurrencies(title,currencyListFiltered), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/addBook")
     public ResponseEntity<?> create(@Valid @RequestBody BookDto bookDto) {
         bookService.create(bookDto);
@@ -46,7 +61,7 @@ public class BookController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") int id, @Valid @RequestBody BookDto bookDto) throws BookException {
+    public ResponseEntity<?> update(@PathVariable(name = "id") int id, @Valid @RequestBody BookDto bookDto) {
         bookService.update(bookDto, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

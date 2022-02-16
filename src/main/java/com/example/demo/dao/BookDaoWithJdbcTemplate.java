@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import com.example.demo.model.Book;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -24,9 +25,9 @@ public class BookDaoWithJdbcTemplate implements BookDao{
                 book.getWeight(),
                 book.getCost());
         if (result != 1){
-            log.error("Can't create book");
+            log.error("Can't create book {}", book);
         }
-        log.info("Book was create");
+        log.info("Book was create {}", book);
     }
 
     public List<Book> readAll() {
@@ -42,24 +43,37 @@ public class BookDaoWithJdbcTemplate implements BookDao{
                 book.getCost(),
                 id);
         if (result != 1) {
-            log.error("Can't update book");
+            log.error("Can't update book by id: {}", id);
             return false;
         }
-        log.info("Book was update");
+        log.info("Book was update by id: {}", id);
         return true;
     }
 
     public boolean delete(int id) {
         int result =  jdbcTemplate.update(deleteSql, id);
         if (result != 1) {
-            log.error("Can't delete book");
+            log.error("Can't delete book by id: {}", id);
             return false;
         }
-        log.info("Book was delete");
+        log.info("Book was delete by id: {}", id);
         return true;
     }
 
     public List<Book> getBookByAuthor(String author) {
         return jdbcTemplate.query(selectSqlByAuthor, new Object[]{"%" + author + "%"}, new BeanPropertyRowMapper<>(Book.class));
+    }
+
+    @Override
+    public Book getPriceByTitle(String title) {
+        try {
+            Book book = jdbcTemplate.queryForObject(selectBookByTitle, new BeanPropertyRowMapper<>(Book.class),
+                    "%" + title + "%");
+            log.info("Prices successfully received by title: {}", title);
+            return book;
+        } catch (EmptyResultDataAccessException e) {
+            log.error("Price not found by title: {}", title);
+            return null;
+        }
     }
 }

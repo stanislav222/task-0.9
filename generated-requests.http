@@ -1,0 +1,40 @@
+PUT http://localhost:8080/api/book/2
+Content-Type: application/json
+
+{
+  "isbn": "355",
+  "title": "2",
+  "name": "Ivan",
+  "surname": "Ivanov",
+  "sheets": "200",
+  "weight": "5555",
+  "cost": 32.222
+}
+
+###
+POST http://localhost:8080/api/book/addBook
+Content-Type: application/json
+
+{
+  "isbn": "3",
+  "title": "2",
+  "name": "Ivan",
+  "surname": "Ivanov",
+  "sheets": "200",
+  "weight": "5555",
+  "cost": 32.222
+}
+###
+GET http://localhost:8080/api/book/booksList
+
+###
+GET http://localhost:8080/api/book/rowling
+
+###
+DELETE http://localhost:8080/api/book/5
+
+###
+GET http://localhost:8080/api/book/price/Harry Potter?nameCurrency=RUB, USD, EUR
+
+###
+GET http://localhost:8080/api/book/price/Harry Potter

@@ -1,9 +1,9 @@
 package com.example.demo.sevice;
 
-import com.example.demo.external.OpenLibraryExchangeClient;
-import com.example.demo.external.dto.AuthorFromOpenLibDto;
-import com.example.demo.external.dto.BookFromOpenLibraryDto;
-import com.example.demo.external.dto.BooksFromOpenLibraryDto;
+import com.example.demo.external.openlibrary.OpenLibraryExchangeClient;
+import com.example.demo.external.openlibrary.dto.AuthorFromOpenLibDto;
+import com.example.demo.external.openlibrary.dto.BookFromOpenLibraryDto;
+import com.example.demo.external.openlibrary.dto.BooksFromOpenLibraryDto;
 import lombok.SneakyThrows;
 import org.json.JSONArray;
 import org.json.JSONObject;

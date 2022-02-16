@@ -32,7 +32,6 @@ public class TestController {
                 "201 for" + id,
                 HttpStatus.CREATED);
     }
-
     @PostMapping(path = "/echo",
             produces = {  MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
         public TestDto create() {

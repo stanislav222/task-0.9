@@ -9,41 +9,41 @@ databaseChangeLog:
             columns:
               - column:
                   name: isbn
-                  value: "2-266-11156-6"
+                  value: "978-1338596700"
               - column:
                   name: title
-                  value: "Hello world"
+                  value: "Harry Potter and the Sorcerer's Stone"
               - column:
                   name: author
                   value: "J.K Rowling"
               - column:
                   name: sheets
-                  value: "100"
+                  value: "368 pages"
               - column:
                   name: weight
-                  value: "200gramm"
+                  value: "2.35 pounds"
               - column:
                   name: cost
-                  value: 12.22
+                  value: 1426.9622
         - insert:
             tableName: book
             columns:
               - column:
                   name: isbn
-                  value: "2-266-11156-7"
+                  value: "978-1338716535"
               - column:
                   name: title
-                  value: "Hello earth"
+                  value: "Harry Potter and the Chamber of Secrets"
               - column:
                   name: author
-                  value: "Sergey Ivanov"
+                  value: "J.K Rowling"
               - column:
                   name: sheets
-                  value: "500"
+                  value: "400 pages"
               - column:
                   name: weight
-                  value: "100 gramm"
+                  value: "2.51 pounds"
               - column:
                   name: cost
-                  value: 19.22
+                  value: 1460.0222
 
