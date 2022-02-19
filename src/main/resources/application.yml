@@ -1,6 +1,11 @@
 spring:
   liquibase:
     enabled: true
+  kafka:
+    bootstrap-servers: localhost:29092
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
 
   datasource:
@@ -19,8 +24,13 @@ spring:
       # максимальное время жизни (в миллисекундах) после закрытия соединения в пуле (10 мин)
       max-lifetime: 600000
 
+### Custom props
 open-library:
   settings:
     base-url: https://openlibrary.org/
     limit-record: 10
+enable:
+  kafkaListener: true
+
+
 
