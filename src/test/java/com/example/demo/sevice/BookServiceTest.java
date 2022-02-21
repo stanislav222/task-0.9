@@ -1,12 +1,16 @@
 package com.example.demo.sevice;
 
 import com.example.demo.dao.BookDaoWithJdbcTemplate;
+import com.example.demo.dto.NationalRateDto;
+import com.example.demo.external.alfabank.AlfaBankExchangeClient;
+import com.example.demo.external.alfabank.model.Currency;
 import com.example.demo.external.openlibrary.OpenLibraryExchangeClient;
-import com.example.demo.model.Book;
 import com.example.demo.external.openlibrary.dto.AuthorFromOpenLibDto;
-import com.example.demo.model.dto.BookDto;
 import com.example.demo.external.openlibrary.dto.BookFromOpenLibraryDto;
+import com.example.demo.model.Book;
+import com.example.demo.model.dto.BookDto;
 import com.example.demo.util.ModelMapper;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,11 +19,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.comparesEqualTo;
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -37,6 +44,9 @@ class BookServiceTest {
     @Mock
     private OpenLibraryExchangeClient openLibraryExchangeClient;
 
+    @Mock
+    private AlfaBankExchangeClient alfaBankExchangeClient;
+    
     @InjectMocks
     private BookService bookService;
 
@@ -125,5 +135,35 @@ class BookServiceTest {
         assertThat(bookDto.getSheets(), equalTo("sheets"));
         assertThat(bookDto.getWeight(), equalTo("weight"));
         assertThat(bookDto.getCost(), comparesEqualTo(new BigDecimal("0.0")));
+    }
+
+    @SneakyThrows
+    @Test
+    void getPriceByTitle() {
+        when(bookDaoWithJdbcTemplate.getPriceByTitle(anyString())).thenReturn(bookForTest);
+        BigDecimal price = bookService.getPriceByTitle("title");
+        Assertions.assertEquals(new BigDecimal("0.0"), price);
+    }
+
+    @SneakyThrows
+    @Test
+    void getPriceByTitleWithCostInDifferentCurrencies() {
+        when(bookDaoWithJdbcTemplate.getPriceByTitle(anyString())).thenReturn(bookForTest);
+        when(alfaBankExchangeClient.getTheCurrentCurrencySaleRate(List.of(Currency.RUB)))
+                .thenReturn(Collections.singletonList(new NationalRateDto() {{
+                    setRate(new BigDecimal("3.405200"));
+                    setCode(643);
+                    setDate(LocalDate.of(2022, 02, 17));
+                    setIso("RUB");
+                    setName("российский рубль");
+                    setQuantity(100);
+                }}));
+        String price = bookService.getPriceByTitleWithCostInDifferentCurrencies("title", 
+                List.of(Currency.RUB));
+        Assertions.assertEquals(String.format("{\n" +
+                "  \"title\": %s,\n" +
+                "  \"BLR\": %s,\n" +
+                "  \"other currency at the AlfaBank exchange rate\" : %s \n" +
+                "}", "title", bookForTest.getCost() , "RUB : 0.0000"), price);
     }
 }

@@ -30,7 +30,7 @@ open-library:
     base-url: https://openlibrary.org/
     limit-record: 10
 enable:
-  kafkaListener: true
+  kafkaListener: false
 
 
 

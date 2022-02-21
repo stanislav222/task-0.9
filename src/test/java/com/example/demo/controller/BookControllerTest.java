@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.BookException;
+import com.example.demo.external.alfabank.model.Currency;
+import com.example.demo.interceptor.SendingToKafka;
 import com.example.demo.model.dto.BookDto;
 import com.example.demo.sevice.BookService;
 import org.junit.jupiter.api.Test;
@@ -7,7 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -15,15 +23,15 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 
 @WebMvcTest(BookController.class)
 class BookControllerTest {
 
     @MockBean
     private BookService bookService;
+
+    @MockBean
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
     private MockMvc mvc;
@@ -138,4 +146,43 @@ class BookControllerTest {
                 .andExpect(content().json("{\"message\": \"Book was not deleted\"}"))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void getPrice() throws Exception {
+        when(bookService.getPriceByTitle("test")).thenReturn(new BigDecimal("12.16"));
+        mvc.perform(get("/api/book/price/{title}", "test")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("12.16"));
+    }
+
+    @Test
+    void getPriceWithException() throws Exception {
+        when(bookService.getPriceByTitle("test")).thenThrow(new BookException("Test"));
+        mvc.perform(get("/api/book/price/{title}", "test")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json("{\"message\": \"Test\"}"));
+    }
+
+    @Test
+    void getPriceWithCurrency() throws Exception {
+        when(bookService.getPriceByTitleWithCostInDifferentCurrencies("test", List.of(Currency.RUB)
+                )).thenReturn("test string");
+        mvc.perform(get("/api/book/price/test?nameCurrency=RUB")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("test string"));
+    }
+
+    @Test
+    void getPriceWithCurrencyWithException() throws Exception {
+        when(bookService.getPriceByTitleWithCostInDifferentCurrencies("test", List.of(Currency.RUB)
+        )).thenThrow(new BookException("Test"));
+        mvc.perform(get("/api/book/price/test?nameCurrency=RUB")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json("{\"message\": \"Test\"}"));
+    }
+
 }

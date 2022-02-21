@@ -2,9 +2,11 @@ package com.example.demo.interceptor;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.common.protocol.types.Field;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
+import org.springframework.util.concurrent.SuccessCallback;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,16 +35,25 @@ public class SendingToKafka implements HandlerInterceptor {
                 ));
         Clock clock = Clock.systemUTC();
         kafkaTemplate.send("audit", request.getRemoteAddr(),
-                String.format("Time UTC: %s, Headers: %s", clock.instant(), headersMap.toString()));
+                String.format("Time UTC: %s, Headers: %s", clock.instant(), headersMap.toString()))
+                .addCallback(result -> {
+                    if (result != null) {
+                        RecordMetadata metadata = result.getRecordMetadata();
+                        log.info("produce to {}, {}, {}",
+                                metadata.topic(),
+                                metadata.partition(),
+                                metadata.offset());
+                    }
+                }, ex -> {
+                });
+        kafkaTemplate.flush();
         return true;
     }
-
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         if (ex != null){
             log.error("Something went wrong");
         }
-        log.info("Message added to Kafka topic");
     }
 }

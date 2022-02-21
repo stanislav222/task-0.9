@@ -1,4 +1,4 @@
-package com.example.demo.sevice;
+package com.example.demo.external.openlibrary;
 
 import com.example.demo.external.openlibrary.OpenLibraryExchangeClient;
 import com.example.demo.external.openlibrary.dto.AuthorFromOpenLibDto;

@@ -37,11 +37,6 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
         } else if (response.getStatusCode().series() == HttpStatus.Series.CLIENT_ERROR) {
                 log.info("Something with the client request: {}",
                         getErrorMessage(response.getRawStatusCode(), response.getStatusText(), body, this.getCharset(response)));
-            if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
-                log.info("The service is not available: {}",
-                        getErrorMessage(response.getRawStatusCode(), response.getStatusText(), body, this.getCharset(response)));
-                //throw new NotFoundException("Something went wrong, the service is not available");
-            }
         }
     }
     private String getErrorMessage(int rawStatusCode, String statusText, @Nullable byte[] responseBody, @Nullable Charset charset) {
