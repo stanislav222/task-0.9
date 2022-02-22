@@ -12,6 +12,7 @@ import com.example.demo.model.dto.BookDto;
 import com.example.demo.util.ModelMapper;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,7 +20,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,24 +29,23 @@ import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BookServiceTest {
 
     @Mock
-    private BookDaoWithJdbcTemplate bookDaoWithJdbcTemplate;
+    private AlfaBankExchangeClient alfaBankExchangeClient;
 
     @Mock
-    private ModelMapper modelMapper;
+    private BookDaoWithJdbcTemplate bookDaoWithJdbcTemplate;
 
     @Mock
     private OpenLibraryExchangeClient openLibraryExchangeClient;
 
     @Mock
-    private AlfaBankExchangeClient alfaBankExchangeClient;
-    
+    private ModelMapper modelMapper;
+
     @InjectMocks
     private BookService bookService;
 
@@ -56,6 +55,12 @@ class BookServiceTest {
             new AuthorFromOpenLibDto("key", "name"),
             "title",
             "key");
+
+    @BeforeEach
+    public void init() {
+        lenient().when(modelMapper.bookDTOConvertToBookModel(dtoForTest)).thenReturn(bookForTest);
+        lenient().when(modelMapper.bookModelConvertToBookDTO(bookForTest)).thenReturn(dtoForTest);
+    }
 
     @Test
     void create() {
@@ -67,14 +72,13 @@ class BookServiceTest {
     void readAll() {
         when(bookDaoWithJdbcTemplate.readAll()).thenReturn(List.of(bookForTest));
         List<BookDto> dtoList = bookService.readAll();
-        Assertions.assertEquals(dtoList, List.of(bookForTest).stream().map(modelMapper::bookModelConvertToBookDTO)
-                .collect(Collectors.toList()));
+        Assertions.assertEquals(dtoList, List.of(dtoForTest));
     }
 
     @Test
     void update() {
         when(bookDaoWithJdbcTemplate.update(bookForTest, 1)).thenReturn(true);
-        boolean update = bookService.update(modelMapper.bookModelConvertToBookDTO(bookForTest), 1);
+        boolean update = bookService.update(dtoForTest, 1);
         Assertions.assertTrue(update);
     }
 
@@ -103,7 +107,7 @@ class BookServiceTest {
                 .collect(Collectors.toCollection(() -> dtoList2)));
     }
 
-    @Test
+     @Test
     void bookDTOConvertToBookModel() {
         Book book = modelMapper.bookDTOConvertToBookModel(dtoForTest);
         assertThat(book.getIsbn(), equalTo("isbn"));
@@ -114,10 +118,12 @@ class BookServiceTest {
         assertThat(book.getCost(), comparesEqualTo(new BigDecimal("0.0")));
     }
 
-    @Test
+   @Test
     void openLibraryDtoConvertToBookDTO() {
         String info = "info missing in openLibrary";
-        BookDto bookDto = modelMapper.openLibraryDtoConvertToBookDTO(libraryDtoForTest);
+       lenient().when(modelMapper.openLibraryDtoConvertToBookDTO(libraryDtoForTest))
+               .thenReturn(new BookDto(info, "title", "name", info, info, new BigDecimal("0.0")));
+       BookDto bookDto = modelMapper.openLibraryDtoConvertToBookDTO(libraryDtoForTest);
         assertThat(bookDto.getIsbn(), equalTo(info));
         assertThat(bookDto.getTitle(), equalTo("title"));
         assertThat(bookDto.getAuthor(), equalTo("name"));
@@ -153,7 +159,8 @@ class BookServiceTest {
                 .thenReturn(Collections.singletonList(new NationalRateDto() {{
                     setRate(new BigDecimal("3.405200"));
                     setCode(643);
-                    setDate(LocalDate.of(2022, 02, 17));
+                    //setDate(LocalDate.of(2022, 02, 17));
+                    setDate("17.02.2022");
                     setIso("RUB");
                     setName("российский рубль");
                     setQuantity(100);
@@ -163,7 +170,7 @@ class BookServiceTest {
         Assertions.assertEquals(String.format("{\n" +
                 "  \"title\": %s,\n" +
                 "  \"BLR\": %s,\n" +
-                "  \"other currency at the AlfaBank exchange rate\" : %s \n" +
+                "  \"national bank exchange rate\" : %s \n" +
                 "}", "title", bookForTest.getCost() , "RUB : 0.0000"), price);
     }
 }

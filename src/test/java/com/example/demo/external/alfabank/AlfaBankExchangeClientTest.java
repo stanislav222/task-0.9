@@ -1,14 +1,15 @@
 package com.example.demo.external.alfabank;
 
-import com.example.demo.config.RestClientConfig;
 import com.example.demo.dto.NationalRateDto;
 import com.example.demo.exception.RestTemplateResponseErrorHandler;
+import com.example.demo.external.alfabank.config.RestClientAlfaConfig;
 import com.example.demo.external.alfabank.model.Currency;
-import com.example.demo.interceptor.LoggingRestTemplate;
+import com.example.demo.interceptor.LoggingRestTemplateInterceptor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.core.io.Resource;
@@ -29,9 +30,9 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 @RestClientTest
 @ContextConfiguration(classes = {
-        RestClientConfig.class ,
+        RestClientAlfaConfig.class ,
         RestTemplateResponseErrorHandler.class,
-        LoggingRestTemplate.class,
+        LoggingRestTemplateInterceptor.class,
         AlfaBankExchangeClient.class
 })
 class AlfaBankExchangeClientTest {
@@ -43,6 +44,7 @@ class AlfaBankExchangeClientTest {
     private AlfaBankExchangeClient alfaBankExchangeClient;
 
     @Autowired
+    @Qualifier("alfaBankRestTemplate")
     RestTemplate restTemplate;
 
     @Autowired

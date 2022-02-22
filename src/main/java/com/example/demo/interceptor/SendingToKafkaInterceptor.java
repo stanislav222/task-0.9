@@ -1,12 +1,11 @@
 package com.example.demo.interceptor;
 
+import com.example.demo.config.kafka.KafkaPropertiesConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.SuccessCallback;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +20,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class SendingToKafka implements HandlerInterceptor {
+public class SendingToKafkaInterceptor implements HandlerInterceptor {
 
+    private final KafkaPropertiesConfig config;
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
@@ -34,12 +34,12 @@ public class SendingToKafka implements HandlerInterceptor {
                         header -> Collections.list(request.getHeaders(header))
                 ));
         Clock clock = Clock.systemUTC();
-        kafkaTemplate.send("audit", request.getRemoteAddr(),
+        kafkaTemplate.send(config.getTopicsName(), request.getRemoteAddr(),
                 String.format("Time UTC: %s, Headers: %s", clock.instant(), headersMap.toString()))
                 .addCallback(result -> {
                     if (result != null) {
                         RecordMetadata metadata = result.getRecordMetadata();
-                        log.info("produce to {}, {}, {}",
+                        log.info("Produce to topic: {}, Num. partition {}, Offset {}",
                                 metadata.topic(),
                                 metadata.partition(),
                                 metadata.offset());

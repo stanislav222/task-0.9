@@ -6,13 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class DemoApplicationTests {
-
-	@Value("${test.topic}")
-	private String topic;
-
 	@Test
 	void contextLoads() {
-
 	}
 
 }

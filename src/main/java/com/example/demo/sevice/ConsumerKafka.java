@@ -10,9 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 @ConditionalOnProperty(prefix = "enable", name = "kafkaListener", matchIfMissing = true)
 public class ConsumerKafka {
-    @KafkaListener(topics = {"audit"}, groupId = "book-group")
+    @KafkaListener(topics = {"${spring.kafka.topics-name}"}, groupId = "${spring.kafka.topics-group-id}")
     public void consume(ConsumerRecord<String, String> consumerRecord) {
         log.info("Key: {} - Info: {}",
+                //если есть русские символы иногда StringDeserializer
+                //из пакета org.apache.kafka.common.serialization добавляет �
                 consumerRecord.key().replace("�", ""),
                 consumerRecord.value().replace("�", ""));
     }

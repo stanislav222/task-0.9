@@ -1,0 +1,390 @@
+{
+  "links": {
+    "self": "/authors/OL23919A/works.json?limit=10",
+    "author": "/authors/OL23919A",
+    "next": "/authors/OL23919A/works.json?limit=10&offset=10"
+  },
+  "size": 430,
+  "entries": [
+    {
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "HARRY POTTER & DER STEIN - ROW",
+      "authors": [
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL23919A"
+          }
+        }
+      ],
+      "covers": [
+        12389447
+      ],
+      "key": "/works/OL26425040W",
+      "latest_revision": 2,
+      "revision": 2,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2021-11-30T21:35:40.899827"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2022-02-22T16:28:07.809025"
+      }
+    },
+    {
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "Harry Potter Kamen Modrosti",
+      "authors": [
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL23919A"
+          }
+        }
+      ],
+      "covers": [
+        12518635
+      ],
+      "key": "/works/OL27017455W",
+      "latest_revision": 2,
+      "revision": 2,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2022-01-02T22:14:44.704520"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2022-02-22T16:28:07.809025"
+      }
+    },
+    {
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "Harry Potter E La Camera Dei Segreti",
+      "authors": [
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL23919A"
+          }
+        }
+      ],
+      "covers": [
+        12604696
+      ],
+      "key": "/works/OL27280670W",
+      "latest_revision": 2,
+      "revision": 2,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2022-02-02T16:10:13.634569"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2022-02-22T16:28:07.809025"
+      }
+    },
+    {
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "Harry Potter i la pedra filosofal",
+      "authors": [
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL23919A"
+          }
+        },
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL8741607A"
+          }
+        }
+      ],
+      "covers": [
+        12454756
+      ],
+      "key": "/works/OL26436392W",
+      "latest_revision": 2,
+      "revision": 2,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2021-12-20T16:39:36.727083"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2022-02-22T16:28:07.809025"
+      }
+    },
+    {
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "Harry Potter y las reliquias de la muerte",
+      "authors": [
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL23919A"
+          }
+        }
+      ],
+      "covers": [
+        12389355
+      ],
+      "key": "/works/OL26425007W",
+      "latest_revision": 2,
+      "revision": 2,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2021-11-30T18:02:57.606934"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2022-02-22T16:28:07.809025"
+      }
+    },
+    {
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "Harry Potter Y La Piedra Filosofal",
+      "authors": [
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL23919A"
+          }
+        }
+      ],
+      "covers": [
+        12498982
+      ],
+      "key": "/works/OL26586072W",
+      "latest_revision": 2,
+      "revision": 2,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2021-12-27T15:46:41.383929"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2022-02-22T16:28:07.809025"
+      }
+    },
+    {
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "Harry Potter House Ravenclaw Edition Series 16-20",
+      "authors": [
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL23919A"
+          }
+        },
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL9959874A"
+          }
+        },
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL9959875A"
+          }
+        },
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL9959876A"
+          }
+        },
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL9959877A"
+          }
+        },
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL9959878A"
+          }
+        },
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL9959879A"
+          }
+        },
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL9959880A"
+          }
+        },
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL9959881A"
+          }
+        },
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL9959882A"
+          }
+        }
+      ],
+      "covers": [
+        12392632
+      ],
+      "key": "/works/OL26427391W",
+      "latest_revision": 2,
+      "revision": 2,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2021-12-06T16:52:04.218741"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2022-02-22T16:28:07.809025"
+      }
+    },
+    {
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "Harry Potter House Gryffindor Edition Series 1-5 Books Collection Set By J.K. Rowling",
+      "authors": [
+        {
+          "author": {
+            "key": "/authors/OL23919A"
+          },
+          "type": {
+            "key": "/type/author_role"
+          }
+        }
+      ],
+      "covers": [
+        12388072
+      ],
+      "key": "/works/OL26423974W",
+      "latest_revision": 6,
+      "revision": 6,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2021-11-29T16:39:22.628417"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2022-02-22T16:28:07.809025"
+      }
+    },
+    {
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "Harry Potter and the Goblet of Fire 4",
+      "authors": [
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL23919A"
+          }
+        }
+      ],
+      "covers": [
+        12467587
+      ],
+      "key": "/works/OL26442666W",
+      "latest_revision": 2,
+      "revision": 2,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2021-12-23T05:32:39.957827"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2022-02-22T16:28:07.809025"
+      }
+    },
+    {
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "Box Harry Potter - Edicao Comemorativa 20 Anos",
+      "authors": [
+        {
+          "type": {
+            "key": "/type/author_role"
+          },
+          "author": {
+            "key": "/authors/OL23919A"
+          }
+        }
+      ],
+      "covers": [
+        12390565
+      ],
+      "key": "/works/OL26425822W",
+      "latest_revision": 2,
+      "revision": 2,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2021-12-02T19:43:09.265531"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2022-02-22T16:28:07.809025"
+      }
+    }
+  ]
+}

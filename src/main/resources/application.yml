@@ -6,7 +6,11 @@ spring:
     consumer:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-
+    # Custom props for Kafka
+    topics-name: audit
+    topics-partitions: 1
+    topics-replicas: 1
+    topics-group-id: book-group
 
   datasource:
     url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:5434/postgres
@@ -27,10 +31,15 @@ spring:
 ### Custom props
 open-library:
   settings:
-    base-url: https://openlibrary.org/
+    base-url: https://openlibrary.org
     limit-record: 10
+
+alfa-bank:
+  setting:
+    base-url: https://developerhub.alfabank.by:8273
+
 enable:
-  kafkaListener: false
+  kafkaListener: true
 
 
 

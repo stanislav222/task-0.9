@@ -1,8 +1,7 @@
-package com.example.demo.config;
+package com.example.demo.config.kafka;
 
-import org.apache.kafka.common.serialization.IntegerSerializer;
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -14,15 +13,16 @@ import java.util.Map;
 import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
 @Configuration
+@RequiredArgsConstructor
 public class KafkaProducerConfig {
-    @Value(value = "${spring.kafka.bootstrap-servers}")
-    private String bootstrapAddress;
+
+    private final KafkaPropertiesConfig config;
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         return new DefaultKafkaProducerFactory<>(
                 Map.of(
-                        BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress,
+                        BOOTSTRAP_SERVERS_CONFIG, config.getBootstrapServers(),
                         ACKS_CONFIG, "-1",
                         RETRIES_CONFIG, 1,
                         BATCH_SIZE_CONFIG, 2222,

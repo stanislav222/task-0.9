@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.external.openlibrary.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

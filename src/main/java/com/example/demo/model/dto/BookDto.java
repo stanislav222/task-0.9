@@ -3,6 +3,7 @@ package com.example.demo.model.dto;
 import com.example.demo.util.BookJsonDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonDeserialize(using = BookJsonDeserializer.class)
+@Schema(name = "BookResponse", description = "Выходная модель, содержащая основные поля книги")
 public class BookDto {
     @JsonIgnore
     private Integer id;
