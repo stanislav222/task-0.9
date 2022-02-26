@@ -22,6 +22,10 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
@@ -94,6 +98,21 @@
 			<groupId>org.testcontainers</groupId>
 			<artifactId>kafka</artifactId>
 			<version>1.15.3</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- for webClient Test -->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.9.3</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>mockwebserver</artifactId>
+			<version>4.9.3</version>
 			<scope>test</scope>
 		</dependency>
 

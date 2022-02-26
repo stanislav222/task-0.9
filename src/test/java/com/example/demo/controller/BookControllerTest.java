@@ -173,7 +173,8 @@ class BookControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(content().string("1.11")).andExpect(status().isOk());
+                .andExpect(content().string("1.11"))
+                .andExpect(status().isOk());
        verify(bookService).getPriceByTitle("title");
     }
 

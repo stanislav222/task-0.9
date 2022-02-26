@@ -36,12 +36,12 @@ public class LoggingRestTemplateInterceptor implements ClientHttpRequestIntercep
     private void loggingResponse(ClientHttpResponse response) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(response.getBody(), StandardCharsets.UTF_8));
         String collect = bufferedReader.lines().collect(Collectors.joining(System.lineSeparator()));
-        log.info("=>".repeat(12)  + " Response to external resource start");
+        log.info("=>".repeat(12)  + " Response from external resource start");
         log.info("Status code  : {}", response.getStatusCode());
         log.info("Status text  : {}", response.getStatusText());
         log.info("Headers      : {}", response.getHeaders());
         log.info("Response body: {}", collect);
-        log.info("..".repeat(12)  + " Response to external resource end");
+        log.info("..".repeat(12)  + " Response from external resource end");
     }
 
 }

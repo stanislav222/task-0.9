@@ -1,4 +1,4 @@
-package com.example.demo.external.openlibrary;
+package com.example.demo.external.openlibrary.service;
 import com.example.demo.external.openlibrary.config.OpenLibraryConfigProperties;
 import com.example.demo.external.openlibrary.dto.AuthorFromOpenLibDto;
 import com.example.demo.external.openlibrary.dto.BookFromOpenLibraryDto;

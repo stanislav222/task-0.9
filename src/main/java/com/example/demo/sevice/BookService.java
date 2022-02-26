@@ -3,9 +3,11 @@ package com.example.demo.sevice;
 import com.example.demo.dao.BookDaoWithJdbcTemplate;
 import com.example.demo.dto.NationalRateDto;
 import com.example.demo.exception.BookException;
-import com.example.demo.external.alfabank.AlfaBankExchangeClient;
+import com.example.demo.external.alfabank.service.AlfaBankExchangeClient;
 import com.example.demo.external.alfabank.model.Currency;
-import com.example.demo.external.openlibrary.OpenLibraryExchangeClient;
+import com.example.demo.external.alfabank.service.AlfaBankExchangeWithWebClient;
+import com.example.demo.external.openlibrary.service.OpenLibraryExchangeClient;
+import com.example.demo.external.openlibrary.service.OpenLibraryExchangeClientWithWebClient;
 import com.example.demo.model.Book;
 import com.example.demo.model.dto.BookDto;
 import com.example.demo.util.ModelMapper;
@@ -25,8 +27,8 @@ import java.util.stream.Collectors;
 public class BookService {
 
     private final BookDaoWithJdbcTemplate bookDaoWithJdbcTemplate;
-    private final OpenLibraryExchangeClient openLibraryExchangeClient;
-    private final AlfaBankExchangeClient alfaBankExchangeClient;
+    private final OpenLibraryExchangeClientWithWebClient openLibraryExchangeClient;
+    private final AlfaBankExchangeWithWebClient alfaBankExchangeClient;
     private final ModelMapper modelMapper;
 
     public void create(BookDto bookDto) {

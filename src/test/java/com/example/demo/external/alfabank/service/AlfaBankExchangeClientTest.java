@@ -1,4 +1,4 @@
-package com.example.demo.external.alfabank;
+package com.example.demo.external.alfabank.service;
 
 import com.example.demo.dto.NationalRateDto;
 import com.example.demo.exception.RestTemplateResponseErrorHandler;

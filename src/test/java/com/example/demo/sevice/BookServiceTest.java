@@ -2,11 +2,13 @@ package com.example.demo.sevice;
 
 import com.example.demo.dao.BookDaoWithJdbcTemplate;
 import com.example.demo.dto.NationalRateDto;
-import com.example.demo.external.alfabank.AlfaBankExchangeClient;
+import com.example.demo.external.alfabank.service.AlfaBankExchangeClient;
 import com.example.demo.external.alfabank.model.Currency;
-import com.example.demo.external.openlibrary.OpenLibraryExchangeClient;
+import com.example.demo.external.alfabank.service.AlfaBankExchangeWithWebClient;
+import com.example.demo.external.openlibrary.service.OpenLibraryExchangeClient;
 import com.example.demo.external.openlibrary.dto.AuthorFromOpenLibDto;
 import com.example.demo.external.openlibrary.dto.BookFromOpenLibraryDto;
+import com.example.demo.external.openlibrary.service.OpenLibraryExchangeClientWithWebClient;
 import com.example.demo.model.Book;
 import com.example.demo.model.dto.BookDto;
 import com.example.demo.util.ModelMapper;
@@ -35,13 +37,13 @@ import static org.mockito.Mockito.*;
 class BookServiceTest {
 
     @Mock
-    private AlfaBankExchangeClient alfaBankExchangeClient;
+    private AlfaBankExchangeWithWebClient alfaBankExchangeClient;
 
     @Mock
     private BookDaoWithJdbcTemplate bookDaoWithJdbcTemplate;
 
     @Mock
-    private OpenLibraryExchangeClient openLibraryExchangeClient;
+    private OpenLibraryExchangeClientWithWebClient openLibraryExchangeClient;
 
     @Mock
     private ModelMapper modelMapper;
