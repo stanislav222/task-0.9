@@ -38,6 +38,10 @@ DELETE http://localhost:8080/api/v1/book/3
 GET http://localhost:8080/api/v1/book/price/Harry Potter?nameCurrency=RUB,USD,EUR
 Content-Type: application/json
 
+### Цена книги по названию из БД, конвертация из BLR -> RUB, USD, EUR, за несколько дат
+GET http://localhost:8080/api/v1/book/price/stat/Harry Potter/RUB,USD,EUR
+Accept: application/json
+
 ### Цена книги по названию
 GET http://localhost:8080/api/v1/book/price/Harry Potter
 Content-Type: application/json

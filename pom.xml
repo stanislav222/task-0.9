@@ -8,8 +8,8 @@
 		<version>2.6.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.intervale</groupId>
+	<artifactId>cources</artifactId>
 	<version>0.7.0</version>
 	<name>SimpleProject</name>
 	<description>Test spring boot </description>
@@ -137,6 +137,19 @@
 			<version>20180130</version>
 		</dependency>
 
+		<!-- for svg -->
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreesvg</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -167,10 +180,10 @@
 							<generateApiTests>false</generateApiTests>
 							<generateModelTests>false</generateModelTests>
 							<configOptions>
-								<basePackage>com.example.demo</basePackage>
-								<modelPackage>com.example.demo.dto</modelPackage>
-								<apiPackage>com.example.demo.api</apiPackage>
-								<configPackage>com.example.demo.config</configPackage>
+								<basePackage>com.intervale.cources</basePackage>
+								<modelPackage>com.intervale.cources.dto</modelPackage>
+								<apiPackage>com.intervale.cources.api</apiPackage>
+								<configPackage>com.intervale.cources.config</configPackage>
 								<dateLibrary>java8</dateLibrary>
 								<delegatePattern>true</delegatePattern>
 								<interfaceOnly>true</interfaceOnly>
@@ -186,5 +199,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
