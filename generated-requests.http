@@ -1,0 +1,47 @@
+### Update книги по id
+PUT http://localhost:8080/api/v1/book/1
+Content-Type: application/json
+
+{
+  "isbn": "978-0679406419",
+  "title": "War and Peace",
+  "name": "Leo",
+  "surname": "Tolstoy",
+  "sheets": "2201",
+  "weight": "1.93",
+  "cost": 34.2222
+}
+
+### Добавление книги
+POST http://localhost:8080/api/v1/book/addBook
+Content-Type: application/json
+
+{
+  "isbn": "978-5-4461-1446-7",
+  "title": "Business modeling and data analysis",
+  "name": "Wayne L.",
+  "surname": "Winston",
+  "sheets": "944",
+  "weight": "1.93",
+  "cost": 26.9000
+}
+### Список всех книг
+GET http://localhost:8080/api/v1/book/booksList
+
+### Список книг по автору из БД и OpenLib
+GET http://localhost:8080/api/v1/book/rowling
+
+### Удаление книги по id
+DELETE http://localhost:8080/api/v1/book/3
+
+### Цена книги по названию из БД и конвертация из BLR -> RUB, USD, EUR
+GET http://localhost:8080/api/v1/book/price/Harry Potter?nameCurrency=RUB,USD,EUR
+Content-Type: application/json
+
+### Цена книги по названию из БД, конвертация из BLR -> RUB, USD, EUR, за несколько дат
+GET http://localhost:8080/api/v1/book/price/stat/Harry Potter/RUB,USD,EUR
+Accept: application/json
+
+### Цена книги по названию
+GET http://localhost:8080/api/v1/book/price/Harry Potter
+Content-Type: application/json

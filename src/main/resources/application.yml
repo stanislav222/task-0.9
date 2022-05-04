@@ -1,0 +1,45 @@
+spring:
+  liquibase:
+    enabled: true
+  kafka:
+    bootstrap-servers: localhost:29092
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    # Custom props for Kafka
+    topics-name: audit
+    topics-partitions: 1
+    topics-replicas: 1
+    topics-group-id: book-group
+
+  datasource:
+    url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:5434/postgres
+    password: postgres
+    username: postgres
+    hikari:
+      # максимальное время, в течение которого клиент ожидает
+      # подключения из пула подключений (20 сек)
+      connection-timeout: 20000
+      # минимальное и максимальное кол-во соединений
+      minimum-idle: 5
+      maximum-pool-size: 10
+      # максимальное время бездействия соединения в пуле (5 мин)
+      idle-timeout: 300000
+      # максимальное время жизни (в миллисекундах) после закрытия соединения в пуле (10 мин)
+      max-lifetime: 600000
+
+### Custom props
+open-library:
+  settings:
+    base-url: https://openlibrary.org
+    limit-record: 10
+
+alfa-bank:
+  setting:
+    base-url: https://developerhub.alfabank.by:8273
+
+enable:
+  kafkaListener: true
+
+
+
