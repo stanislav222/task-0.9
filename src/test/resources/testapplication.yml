@@ -1,0 +1,9 @@
+spring:
+  kafka:
+    consumer:
+      ## гарантирует, что наша группа потребителей получит сообщения, которые мы отправляем,
+      ## потому что контейнер может запуститься после завершения отправки
+      auto-offset-reset: earliest
+      group-id: bookApp
+test:
+  topic: test-topic
